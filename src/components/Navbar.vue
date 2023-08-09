@@ -25,8 +25,11 @@
 
 <script setup lang="ts">
 
-import { Ref, ref } from 'vue'
-import { Router, useRouter } from 'vue-router'
+import type { Ref } from 'vue'
+import type { Router } from 'vue-router'
+
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const router: Router = useRouter()
 

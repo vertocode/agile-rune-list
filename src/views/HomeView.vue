@@ -1,5 +1,5 @@
 <template>
-  <Card>
+  <CardHome>
     <h1>RUNE FAST WIKI</h1>
     <h2>Experience our fast and user-friendly app for quick access to item data, player rankings, profiles, and clan standings. Elevate your gaming with essential insights at your fingertips.</h2>
 
@@ -40,12 +40,12 @@
       </div>
     </div>
 
-  </Card>
+  </CardHome>
 </template>
 
 <script lang="ts" setup>
 
-import Card from '@/components/card/Card.vue'
+import CardHome from "@/components/card/CardHome.vue";
 
 const links = {
   launcher: 'https://www.jagex.com/en-US/launcher#_ga=2.246409607.22203394.1691451132-228848729.1691108041',
