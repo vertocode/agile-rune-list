@@ -1,9 +1,11 @@
 <template>
-  <Navbar />
+  <div class="app">
+    <Navbar />
 
-  <main>
-    <RouterView />
-  </main>
+    <main>
+      <RouterView />
+    </main>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -12,4 +14,8 @@ import Navbar from "@/components/Navbar.vue";
 </script>
 
 <style scoped>
+.app {
+  background-color: #F5F5DC;
+  min-height: 100vh;
+}
 </style>

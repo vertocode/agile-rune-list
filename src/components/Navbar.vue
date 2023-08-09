@@ -1,24 +1,26 @@
 <template>
-  <nav class="navbar">
-    <div class="images">
-      <img class="logo" src="@/assets/navbar/header_logo.png" alt="runescape-logo">
-      <div class="sword-content">
-        <img class="sword" src="@/assets/navbar/divine-sword.png" alt="sword-img">
-        <div class="sword-trail"></div>
+  <div class="content">
+    <nav class="navbar">
+      <div class="images">
+        <img class="logo" src="@/assets/navbar/header_logo.png" alt="runescape-logo">
+        <div class="sword-content">
+          <img class="sword" src="@/assets/navbar/divine-sword.png" alt="sword-img">
+          <div class="sword-trail"></div>
+        </div>
       </div>
-    </div>
 
-    <ul class="items">
-      <li
-          v-for="{ label, route } in navOptions"
-          :key="route"
-          :class="{ 'active-item': $route.path === route }"
-          @click="changeRoute(route)"
-      >
-        {{ label }}
-      </li>
-    </ul>
-  </nav>
+      <ul class="items">
+        <li
+            v-for="{ label, route } in navOptions"
+            :key="route"
+            :class="{ 'active-item': $route.path === route }"
+            @click="changeRoute(route)"
+        >
+          {{ label }}
+        </li>
+      </ul>
+    </nav>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -58,10 +60,15 @@ const changeRoute = (route: string) => {
 </script>
 
 <style scoped lang="scss">
-.navbar {
-  padding: 1em;
+.content {
   background-color: var(--primary-color);
-  width: 100%;
+  box-shadow: rgba(247, 190, 61, 0.65) 0 1px 8px;
+  z-index: 3;
+}
+.navbar {
+  margin: auto;
+  padding: 1em;
+  max-width: 1600px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -76,6 +83,7 @@ const changeRoute = (route: string) => {
 
     .logo {
       width: 150px;
+      z-index: 2;
     }
 
     .sword-content {
@@ -83,10 +91,12 @@ const changeRoute = (route: string) => {
       display: flex;
       position: absolute;
       animation: swordMove 15s linear infinite alternate;
-      bottom: 70%;
+      bottom: 10%;
+      opacity: 0.5;
+      z-index: 1;
       .sword {
         position: absolute;
-        width: 80px;
+        width: 40px;
         height: 80px;
         animation: swordRotate 3s linear infinite;
         z-index: 1;
@@ -97,12 +107,14 @@ const changeRoute = (route: string) => {
         top: 60%;
         left: 90%;
         position: absolute;
-        width: 40px;
+        width: 20px;
         height: 10px;
         background-color: #8B0000;
         border-radius: 30%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%) rotate(60deg);
         animation: trailAnimation 3s linear infinite;
+
+        z-index: 1;
       }
 
       @keyframes trailAnimation {
@@ -154,7 +166,6 @@ const changeRoute = (route: string) => {
       font-size: 1.7em;
 
       transition: opacity 0.3s ease;
-      animation: fadeAnimation 0.3s ease-in-out;
       opacity: 1;
 
       &:hover {
@@ -172,8 +183,9 @@ const changeRoute = (route: string) => {
       position: absolute;
       color: white;
       left: -1.3em;
-      animation: fadeAnimation 0.3s ease-in-out;
+      animation: fadeAnimation 2s ease-in alternate;
       opacity: 0.5;
+      transform: rotate(25deg);
     }
   }
 }
@@ -181,9 +193,11 @@ const changeRoute = (route: string) => {
 @keyframes fadeAnimation {
   from {
     opacity: 1;
+    transform: rotate(0deg);
   }
   to {
     opacity: 0.5;
+    transform: rotate(25deg);
   }
 }
 </style>
