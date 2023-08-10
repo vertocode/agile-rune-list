@@ -70,6 +70,7 @@ const links = {
   }
 
   h2 {
+    padding: 1em;
     text-align: center;
     color: #F7BE3D;
   }

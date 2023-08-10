@@ -1,0 +1,1 @@
+export const API = 'https://secure.runescape.com/m=itemdb_rs/api'
