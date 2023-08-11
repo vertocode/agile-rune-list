@@ -44,7 +44,7 @@ const handleInput = () => {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: #fff;
+  background-color: #f3f5f9;
   color: #333;
   width: 100%;
   box-sizing: border-box;

@@ -7,6 +7,7 @@ import GeneralMarketView from '@/views/GeneralMarketView.vue'
 import PlayerRankView from '@/views/PlayerRankView.vue'
 import ClanRankView from '@/views/ClanRankView.vue'
 import PlayerDetailsView from '@/views/PlayerDetailsView.vue'
+import GeneralMarketItemsView from "@/views/GeneralMarketItemsView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,6 +25,11 @@ const router = createRouter({
       path: '/general-market',
       name: 'generalMarket',
       component: GeneralMarketView
+    },
+    {
+      path: '/general-market-items/:id',
+      name: 'generalMarketItems',
+      component: GeneralMarketItemsView,
     },
     {
       path: '/player-rank',

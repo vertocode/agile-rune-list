@@ -1,14 +1,18 @@
 <template>
   <CardHome>
-    <h1>RUNE FAST WIKI</h1>
-    <h2>Experience our fast and user-friendly app for quick access to item data, player rankings, profiles, and clan standings. Elevate your gaming with essential insights at your fingertips.</h2>
+    <h1 class="card-title">RUNE FAST WIKI</h1>
 
-    <h4>Remember the <span class="gold">g(old)</span> times.</h4>
+    <h3>Remember the <span class="gold">g(old)</span> times.</h3>
+
+    <p class="explore-text">
+      Unleash the potential of our menu and embark on a journey to unveil a plethora of insights and functionalities. From unraveling player rankings to effortlessly surveying market items, our app sets the stage for an enriched RuneScape adventure.
+    </p>
+
     <div class="content">
       <div class="game-access">
         <div class="launcher">
           <a :href="links.launcher" target="_blank">
-            <img src="../assets/home/jagex-launcher.jpeg" alt="laucher">
+            <img src="../assets/home/jagex-launcher.jpeg" alt="launcher">
           </a>
           <p>
             The Jagex Launcher remembers your accounts, so there's no need to enter your password each time you play. You can add up to 20 different RuneScape or Old School accounts and quickly switch between them. If you're an Old School player, you can also choose to play using the official client or RuneLite.
@@ -56,23 +60,33 @@ const links = {
 
 <style lang="scss">
 .card {
-  h1 {
+  &-title {
     text-align: center;
     margin-top: 1.3em;
+    color: #f1be2d; /* Orange color */
   }
-  h4 {
+
+  .explore-text {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif; /* Modern font */
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 2rem 0;
+  }
+
+  h3 {
     margin-top: 2em;
     text-align: center;
 
     .gold {
-      color: #F7BE3D;
+      color: #F7BE3D; /* Orange color */
     }
   }
 
   h2 {
     padding: 1em;
     text-align: center;
-    color: #F7BE3D;
+    color: white; /* Orange color */
   }
 
   .content {

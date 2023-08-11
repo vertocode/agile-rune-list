@@ -24,10 +24,8 @@
 </template>
 
 <script setup lang="ts">
-
 import type { Ref } from 'vue'
 import type { Router } from 'vue-router'
-
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -51,7 +49,7 @@ const navOptions = [
     route: '/clan-rank'
   },
   {
-    label: 'Player\'s Details',
+    label: "Player's Details",
     route: '/player-details'
   }
 ]
@@ -64,16 +62,17 @@ const changeRoute = (route: string) => {
 
 <style scoped lang="scss">
 .content {
-  background-color: var(--primary-color);
-  box-shadow: rgba(247, 190, 61, 0.65) 0 1px 8px;
+  background-color:  #f3f5f9;
+  box-shadow: rgba(84, 66, 25, 0.65) 0 1px 8px;
   z-index: 3;
+  font-family: 'Helvetica', sans-serif; /* Modern font */
 }
+
 .navbar {
   margin: auto;
   padding: 1em;
   max-width: 1600px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-around;
   position: relative;
@@ -97,6 +96,7 @@ const changeRoute = (route: string) => {
       bottom: 10%;
       opacity: 0.5;
       z-index: 1;
+
       .sword {
         position: absolute;
         width: 40px;
@@ -116,7 +116,6 @@ const changeRoute = (route: string) => {
         border-radius: 30%;
         transform: translate(-50%, -50%) rotate(60deg);
         animation: trailAnimation 3s linear infinite;
-
         z-index: 1;
       }
 
@@ -150,7 +149,6 @@ const changeRoute = (route: string) => {
         }
       }
     }
-
   }
 
   .items {
@@ -161,30 +159,27 @@ const changeRoute = (route: string) => {
     li {
       z-index: 2;
       position: relative;
-
       list-style-type: none;
-      color: white;
       cursor: pointer;
-      font-family: "cinzel", "Times", "Times New Roman", serif;
       font-size: 1.7em;
-
       transition: opacity 0.3s ease;
       opacity: 1;
+      font-weight: bold; /* Modern font weight */
 
       &:hover {
-        color: rgba(255, 255, 255, 0.44);
+        color: gray;
         opacity: 1;
       }
     }
 
     li.active-item {
-      color: #F7BE3D;
+      color: #F7BE3D; /* Modern orange color */
     }
 
     ::after {
       content: "|";
       position: absolute;
-      color: white;
+      color: black;
       left: -1.3em;
       animation: fadeAnimation 2s ease-in alternate;
       opacity: 0.5;
