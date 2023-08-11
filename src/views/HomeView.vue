@@ -45,7 +45,7 @@
 
 <script lang="ts" setup>
 
-import CardHome from "@/components/card/CardHome.vue";
+import CardHome from '@/components/Card/CardHome.vue'
 
 const links = {
   launcher: 'https://www.jagex.com/en-US/launcher#_ga=2.246409607.22203394.1691451132-228848729.1691108041',
