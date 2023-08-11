@@ -38,8 +38,13 @@
       </div>
 
       <div>
-        <div>
-          <img class="rune-img" src="../assets/home/player.png" alt="player-img">
+        <div class="rune-img">
+          <div class="play-now">
+            <a class="play-button" target="_blank" href="https://play.runescape.com/">Play Now</a>
+          </div>
+          <div>
+            <img  src="../assets/home/armour-player.png" alt="player-img">
+          </div>
         </div>
       </div>
     </div>
@@ -94,8 +99,53 @@ const links = {
     display: flex;
     justify-content: space-evenly;
 
+    @keyframes playerArmourAnimation {
+      0% {
+        transform: perspective(5000px) rotateX(-0.2deg);
+      }
+      100% {
+        transform:  perspective(20px) rotateX(0deg);
+      }
+    }
+
     .rune-img {
-      width: 200px;
+      img  {
+        max-width: 300px;
+      }
+
+      .play-now {
+        width: 200px;
+        position: absolute;
+        top: -15%; /* Adjust as needed */
+        left: 72%; /* Center horizontally */
+        transform: translateX(-50%); /* Center horizontally */
+        text-align: center;
+      }
+
+      .play-button {
+        background-color: #f1be2d; /* Orange color */
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+      }
+
+      .play-button:hover {
+        background-color: #e69915; /* Slightly darker shade of orange on hover */
+      }
+
+      animation: playerArmourAnimation 1s infinite alternate; /* Apply a smooth transition effect */
+
+      &:hover {
+        transform: translate(20px);
+      }
+    }
+
+
+
+    .rune-img:hover {
     }
 
     .game-access {
