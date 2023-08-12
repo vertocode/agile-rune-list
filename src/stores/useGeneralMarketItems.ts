@@ -1,6 +1,8 @@
 import { reactive } from 'vue'
 import type { Ref } from 'vue'
 import { defineStore } from 'pinia'
+import { API } from '@/api'
+import type {RouteParamValue} from "vue-router";
 
 interface Category {
     label: string
@@ -56,6 +58,8 @@ const categories: Category[] = [
     { label: 'Firemaking products', id: 40 },
     { label: 'Archaeology materials', id: 41 }
 ]
+
+const api = new API()
 export const useGeneralMarketItems = defineStore('generalMarketItems', () => {
     const state: State = reactive({
         items: [],
@@ -71,9 +75,14 @@ export const useGeneralMarketItems = defineStore('generalMarketItems', () => {
         })
     }
 
+    const getProductByCategory = async (category: string | number | RouteParamValue[]) => {
+        return await api.get(`/catalogue/category.json?category=${category}`)
+    }
+
     return {
         state,
         categories,
-        filterCategories
+        filterCategories,
+        getProductByCategory
     }
 })

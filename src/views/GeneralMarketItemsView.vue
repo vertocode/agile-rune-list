@@ -1,6 +1,6 @@
 <template>
   <div class="general-market-items">
-    <h1>All items according to the {{ selectedCategory }}:</h1>
+    <h1>All items according to the "{{ selectedCategory }}" category:</h1>
     <div class="list-content">
       <BaseFilter label="Search by item name" @input:value="store.filterCategories"/>
       <div class="list" v-if="store.state.filteredCategories.length">
@@ -22,17 +22,25 @@ import { useGeneralMarketItems } from "@/stores/useGeneralMarketItems";
 import ItemCard from "@/components/GeneralMarket/ItemCard.vue";
 import BaseFilter from "@/components/Input/BaseFilter.vue";
 import NoCategory from "@/components/GeneralMarket/NoCategory.vue";
-import {computed} from "vue";
+import {computed, onBeforeMount, ref} from "vue";
 import { useRoute} from "vue-router";
-import type {RouteParamValue} from "vue-router";
+import type { RouteParamValue } from 'vue-router'
 
 const store = useGeneralMarketItems()
 const route = useRoute()
 const id: string | RouteParamValue[] = route.params.id
+const items = ref([])
 
 const selectedCategory = computed(() => {
-  return 'example'
+  const [category] = store.categories.filter(cateogory => cateogory.id === Number(id))
+  return category.label
 })
+
+onBeforeMount(async () => {
+  items.value = await store.getProductByCategory(id)
+})
+
+
 </script>
 
 <style lang="scss">
