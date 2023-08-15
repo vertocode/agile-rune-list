@@ -3,7 +3,8 @@
     <h1>Select the Category of desired item:</h1>
     <div class="list-content">
       <BaseFilter label="Search by Category or ID" @input:value="store.filterCategories"/>
-      <div class="list" v-if="store.state.filteredCategories.length">
+      <LoadingSpinner v-if="isLoading"/>
+      <div class="list" v-else-if="store.state.filteredCategories.length">
         <CategoryCard
             v-for="{ label, id } in store.state.filteredCategories"
             :key="id"
@@ -22,8 +23,16 @@ import { useGeneralMarketItems } from "@/stores/useGeneralMarketItems";
 import CategoryCard from "@/components/GeneralMarket/CategoryCard.vue";
 import BaseFilter from "@/components/Input/BaseFilter.vue";
 import NoCategory from "@/components/GeneralMarket/NoCategory.vue";
+import { onBeforeMount, ref } from "vue";
+import LoadingSpinner from "@/components/Spinner/LoadingSpinner.vue";
 
 const store = useGeneralMarketItems()
+const isLoading = ref(true)
+
+onBeforeMount(async () => {
+  await store.getCategories()
+  isLoading.value = false
+})
 </script>
 
 <style lang="scss">

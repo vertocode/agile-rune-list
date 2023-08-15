@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_URL = 'https://secure.runescape.com/m=itemdb_rs/api'
+export const API_URL = 'https://rune-fast-api.vercel.app'
 
 export class API {
     #api: string

@@ -63,8 +63,13 @@ const api = new API()
 export const useGeneralMarketItems = defineStore('generalMarketItems', () => {
     const state: State = reactive({
         items: [],
-        filteredCategories: categories
+        filteredCategories: []
     })
+
+    const getCategories = async (): Promise<void> => {
+        const { data } = await api.get(`/categories`)
+        state.filteredCategories = data
+    }
 
     const filterCategories = (value: Ref<string> | string) => {
         state.filteredCategories = categories.filter((category: Category) => {
@@ -75,13 +80,14 @@ export const useGeneralMarketItems = defineStore('generalMarketItems', () => {
         })
     }
 
-    const getProductByCategory = async (category: string | number | RouteParamValue[]) => {
-        return await api.get(`/catalogue/category.json?category=${category}`)
+    const getProductByCategory = async (categoryId: string | number | RouteParamValue[]) => {
+        return await api.get(`/item/${categoryId}`)
     }
 
     return {
         state,
         categories,
+        getCategories,
         filterCategories,
         getProductByCategory
     }
