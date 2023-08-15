@@ -3,15 +3,15 @@
     <h1>All items according to the "{{ selectedCategory }}" category:</h1>
     <div class="list-content">
       <BaseFilter label="Search by item name" @input:value="store.filterCategories"/>
-      <div class="list" v-if="store.state.filteredCategories.length">
+      <div class="list" v-if="store.state.items.length">
         <ItemCard
-            v-for="{ label, id } in store.state.filteredCategories"
+            v-for="{ label, id } in store.state.items"
             :key="id"
             :title="label"
             :id="id"
         />
       </div>
-      <NoCategory v-else/>
+      <NoCategory title-type="items" v-else />
     </div>
   </div>
 </template>
@@ -37,7 +37,7 @@ const selectedCategory = computed(() => {
 })
 
 onBeforeMount(async () => {
-  items.value = await store.getProductByCategory(id)
+  items.value = await store.getItemsByCategory(id)
 })
 
 

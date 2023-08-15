@@ -1,11 +1,22 @@
 <template>
   <div class="no-categories">
     <div class="message">
-      <p>Sorry, no categories were found for your search.</p>
+      <p>Sorry, no {{ titleType }} were found for your search.</p>
       <p>Please try a different search term.</p>
     </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+
+defineProps({
+  titleType: {
+    type: String,
+    default: 'categories'
+  }
+})
+
+</script>
 
 <style scoped>
 .no-categories {

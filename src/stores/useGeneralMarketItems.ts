@@ -35,14 +35,14 @@ export const useGeneralMarketItems = defineStore('generalMarketItems', () => {
         })
     }
 
-    const getProductByCategory = async (categoryId: string | number | RouteParamValue[]) => {
-        return await api.get(`/item/${categoryId}`)
+    const getItemsByCategory = async (categoryId: string | number | RouteParamValue[]) => {
+        return await api.get(`/items/${categoryId}`)
     }
 
     return {
         state,
         getCategories,
         filterCategories,
-        getProductByCategory
+        getItemsByCategory
     }
 })

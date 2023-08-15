@@ -12,13 +12,13 @@ import type { Router } from "vue-router";
 
 const router: Router = useRouter();
 
-const { id } = defineProps({
+const props = defineProps({
   title: String,
   id: Number
 });
 
 const openItems = () => {
-  router.push({ path: `/general-market-items/${id}` });
+  router.push({ path: `/general-market-items/${props.id}` });
 };
 </script>
 
