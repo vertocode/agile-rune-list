@@ -32,7 +32,7 @@ const id: string | RouteParamValue[] = route.params.id
 const items = ref([])
 
 const selectedCategory = computed(() => {
-  const [category] = store.categories.filter(cateogory => cateogory.id === Number(id))
+  const [category] = store.state.filteredCategories.filter(cateogory => cateogory.id === Number(id))
   return category.label
 })
 
