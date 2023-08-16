@@ -1,10 +1,10 @@
 <template>
   <div class="general-market">
     <h1>Select the Category of desired item:</h1>
-    <div class="list-content">
+    <LoadingSpinner v-if="isLoading"/>
+    <div class="list-content" v-else>
       <BaseFilter label="Search by Category or ID" @input:value="store.filterCategories"/>
-      <LoadingSpinner v-if="isLoading"/>
-      <div class="list" v-else-if="store.state.filteredCategories.length">
+      <div class="list" v-if="store.state.filteredCategories.length">
         <CategoryCard
             v-for="{ label, id } in store.state.filteredCategories"
             :key="id"

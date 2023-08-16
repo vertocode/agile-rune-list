@@ -10,14 +10,12 @@ interface Category {
 }
 
 interface State {
-    items: Array<any>
     filteredCategories: Category[]
 }
 
 const api = new API()
 export const useGeneralMarketItems = defineStore('generalMarketItems', () => {
     const state: State = reactive({
-        items: [],
         filteredCategories: []
     })
 
@@ -36,7 +34,8 @@ export const useGeneralMarketItems = defineStore('generalMarketItems', () => {
     }
 
     const getItemsByCategory = async (categoryId: string | number | RouteParamValue[]) => {
-        return await api.get(`/items/${categoryId}`)
+        const response = await api.get(`/items/${categoryId}`)
+        return response.data.items
     }
 
     return {

@@ -1,23 +1,31 @@
 <template>
   <div class="item-card">
     <div class="item-image">
-      <img src="../../assets/home/player.png" alt="item-image">
+      <img :src="item.icon_large" alt="item-image">
     </div>
     <div class="item-content">
-      <div class="item-title">{{ title }}</div>
-      <div class="item-id">ID: {{ id }}</div>
+      <div class="item-title">{{ item.name }}</div>
+      <div class="item-description" v-if="item.description">{{ item.description }}</div>
+      <div class="item-description-placeholder" v-else>No description available</div>
+      <div class="item-price">$GP {{ item.current.price }}</div>
+      <div class="item-id">ID: {{ item.id }}</div>
       <button class="open-button">View Details</button>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    title: String,
-    id: Number
-  }
-};
+<script lang="ts" setup>
+
+interface Item {
+  name: string
+  srcImg: string
+  description?: string
+  price: string
+  id: number
+}
+defineProps<{
+  item: Item
+}>()
 </script>
 
 <style scoped>
@@ -33,6 +41,12 @@ export default {
 
 .item-card:hover {
   transform: translateY(-5px);
+}
+
+.item-price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #47a8f9;
 }
 
 .item-image {
@@ -59,6 +73,17 @@ export default {
   font-size: 24px;
   margin-bottom: 10px;
   color: #333;
+}
+
+.item-description,
+.item-description-placeholder {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.item-description-placeholder {
+  opacity: 0.6;
 }
 
 .item-id {
