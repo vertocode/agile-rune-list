@@ -16,11 +16,14 @@
 
 <script lang="ts" setup>
 
+interface Current {
+  price: string
+}
 interface Item {
   name: string
-  srcImg: string
+  icon_large: string
   description?: string
-  price: string
+  current: Current
   id: number
 }
 defineProps<{

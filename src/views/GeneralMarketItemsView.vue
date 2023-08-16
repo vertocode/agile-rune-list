@@ -25,9 +25,9 @@
       <BaseFilter label="Search by item name" @input:value="store.filterCategories"/>
       <div class="list" v-if="filteredItems?.length">
         <ItemCard
-            v-for="item in filteredItems"
+            v-for="(item, index) in filteredItems"
             :item="item"
-            :key="item.id"
+            :key="index"
         />
       </div>
       <NoCategory title-type="items" v-else />
@@ -42,12 +42,13 @@ import ItemCard from "@/components/GeneralMarket/ItemCard.vue";
 import BaseFilter from "@/components/Input/BaseFilter.vue";
 import NoCategory from "@/components/GeneralMarket/NoCategory.vue";
 import {computed, onBeforeMount, ref} from "vue";
-import { useRoute} from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import type { RouteParamValue } from 'vue-router'
 import LoadingSpinner from "@/components/Spinner/LoadingSpinner.vue";
 
 const store = useGeneralMarketItems()
 const route = useRoute()
+const router = useRouter()
 const id: string | RouteParamValue[] = route.params.id
 const items = ref([])
 const isLoading = ref(true)
@@ -60,6 +61,10 @@ const selectedCategory = computed(() => {
 const filteredItems = computed(() => {
   return items.value.filter(item => item)
 })
+
+const goBack = () => {
+  router.push('/general-market')
+}
 
 onBeforeMount(async () => {
   if (!store.state.filteredCategories.length) {
