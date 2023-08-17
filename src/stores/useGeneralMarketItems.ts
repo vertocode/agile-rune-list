@@ -10,22 +10,25 @@ interface Category {
 }
 
 interface State {
+    allCategories: Category[]
     filteredCategories: Category[]
 }
 
 const api = new API()
 export const useGeneralMarketItems = defineStore('generalMarketItems', () => {
     const state: State = reactive({
+        allCategories: [],
         filteredCategories: []
     })
 
     const getCategories = async (): Promise<void> => {
         const { data } = await api.get(`/categories`)
         state.filteredCategories = data
+        state.allCategories = data
     }
 
     const filterCategories = (value: Ref<string> | string) => {
-        state.filteredCategories = state.filteredCategories.filter((category: Category) => {
+        state.filteredCategories = state.allCategories.filter((category: Category) => {
             const typedValue = String(typeof value === 'string' ? value.toUpperCase() : value.value.toUpperCase())
             const filteredLabel = category.label.toUpperCase().includes(typedValue)
             const filteredId = String(category.id) === typedValue

@@ -58,7 +58,7 @@ const isLoading = ref(true)
 const selectedItem: any = ref({})
 
 const selectedCategory = computed(() => {
-  const [category] = store.state.filteredCategories.filter(cateogory => cateogory.id === Number(id))
+  const [category] = store.state.allCategories.filter(cateogory => cateogory.id === Number(id))
   if (!category) {
     goBack()
   }
