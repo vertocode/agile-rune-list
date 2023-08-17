@@ -22,7 +22,7 @@
     </div>
     <LoadingSpinner v-if="isLoading"/>
     <div class="list-content" v-else>
-      <BaseFilter label="Search by item name" @input:value="store.filterCategories"/>
+      <BaseFilter label="Search by item name or ID" @input:value="filterItems"/>
       <div class="list" v-if="filteredItems?.length">
         <ItemCard
             v-for="(item, index) in filteredItems"
@@ -39,21 +39,22 @@
 
 <script setup lang="ts">
 
-import { useGeneralMarketItems } from "@/stores/useGeneralMarketItems";
-import ItemCard from "@/components/GeneralMarket/ItemCard.vue";
-import BaseFilter from "@/components/Input/BaseFilter.vue";
-import NoCategory from "@/components/GeneralMarket/NoCategory.vue";
-import {computed, onBeforeMount, ref} from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useGeneralMarketItems } from "@/stores/useGeneralMarketItems"
+import ItemCard from "@/components/GeneralMarket/ItemCard.vue"
+import BaseFilter from "@/components/Input/BaseFilter.vue"
+import NoCategory from "@/components/GeneralMarket/NoCategory.vue"
+import {computed, onBeforeMount, ref} from "vue"
+import { useRoute, useRouter } from "vue-router"
 import type { RouteParamValue } from 'vue-router'
-import LoadingSpinner from "@/components/Spinner/LoadingSpinner.vue";
-import ItemModal from "@/components/Modal/ItemModal.vue";
+import LoadingSpinner from "@/components/Spinner/LoadingSpinner.vue"
+import ItemModal from "@/components/Modal/ItemModal.vue"
 
 const store = useGeneralMarketItems()
 const route = useRoute()
 const router = useRouter()
 const id: string | RouteParamValue[] = route.params.id
 const items = ref([])
+const filteredItems = ref([])
 const isLoading = ref(true)
 const selectedItem: any = ref({})
 
@@ -65,9 +66,16 @@ const selectedCategory = computed(() => {
   return category.label
 })
 
-const filteredItems = computed(() => {
-  return items.value.filter(item => item)
-})
+const filterItems = (filterValue) => {
+  console.log(items.value, filteredItems.value)
+  console.log(filterValue)
+  if (!filterValue) {
+    console.log('entrou')
+    console.log(items.value)
+    filteredItems.value = items.value
+  }
+  filteredItems.value = items.value.slice().filter(item => item.name.toUpperCase().includes(filterValue.toUpperCase()) || String(item.id).includes(filterValue))
+}
 
 const goBack = () => {
   router.push('/general-market')
@@ -77,7 +85,10 @@ onBeforeMount(async () => {
   if (!store.state.filteredCategories.length) {
     await store.getCategories()
   }
-  items.value = await store.getItemsByCategory(id)
+  const responseItems = await store.getItemsByCategory(id)
+  items.value = responseItems.filter(item => item)
+  console.log(items.value)
+  filteredItems.value = items.value
   isLoading.value = false
 })
 
