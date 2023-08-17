@@ -9,7 +9,7 @@
       <div class="item-description-placeholder" v-else>No description available</div>
       <div class="item-price">$GP {{ item.current.price }}</div>
       <div class="item-id">ID: {{ item.id }}</div>
-      <button class="open-button">View Details</button>
+      <button class="open-button" @click="$emit('open-modal')">View Details</button>
     </div>
   </div>
 </template>

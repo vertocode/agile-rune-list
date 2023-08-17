@@ -28,10 +28,12 @@
             v-for="(item, index) in filteredItems"
             :item="item"
             :key="index"
+            @open-modal="selectedItem = item"
         />
       </div>
       <NoCategory title-type="items" v-else />
     </div>
+    <ItemModal @close="selectedItem = {}" :item="selectedItem" v-if="selectedItem?.name"/>
   </div>
 </template>
 
@@ -45,6 +47,7 @@ import {computed, onBeforeMount, ref} from "vue";
 import { useRoute, useRouter } from "vue-router";
 import type { RouteParamValue } from 'vue-router'
 import LoadingSpinner from "@/components/Spinner/LoadingSpinner.vue";
+import ItemModal from "@/components/Modal/ItemModal.vue";
 
 const store = useGeneralMarketItems()
 const route = useRoute()
@@ -52,9 +55,13 @@ const router = useRouter()
 const id: string | RouteParamValue[] = route.params.id
 const items = ref([])
 const isLoading = ref(true)
+const selectedItem = ref({})
 
 const selectedCategory = computed(() => {
   const [category] = store.state.filteredCategories.filter(cateogory => cateogory.id === Number(id))
+  if (!category) {
+    goBack()
+  }
   return category.label
 })
 
