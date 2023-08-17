@@ -55,7 +55,7 @@ const router = useRouter()
 const id: string | RouteParamValue[] = route.params.id
 const items = ref([])
 const isLoading = ref(true)
-const selectedItem = ref({})
+const selectedItem: any = ref({})
 
 const selectedCategory = computed(() => {
   const [category] = store.state.filteredCategories.filter(cateogory => cateogory.id === Number(id))
