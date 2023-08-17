@@ -45,9 +45,10 @@ import BaseFilter from "@/components/Input/BaseFilter.vue"
 import NoCategory from "@/components/GeneralMarket/NoCategory.vue"
 import {computed, onBeforeMount, ref} from "vue"
 import { useRoute, useRouter } from "vue-router"
-import type { RouteParamValue } from 'vue-router'
 import LoadingSpinner from "@/components/Spinner/LoadingSpinner.vue"
 import ItemModal from "@/components/Modal/ItemModal.vue"
+import type { RouteParamValue } from 'vue-router'
+import type { Ref } from "vue"
 
 const store = useGeneralMarketItems()
 const route = useRoute()
@@ -66,7 +67,7 @@ const selectedCategory = computed(() => {
   return category.label
 })
 
-const filterItems = (filterValue) => {
+const filterItems = (filterValue: string | Ref<string> | any) => {
   console.log(items.value, filteredItems.value)
   console.log(filterValue)
   if (!filterValue) {
@@ -74,7 +75,7 @@ const filterItems = (filterValue) => {
     console.log(items.value)
     filteredItems.value = items.value
   }
-  filteredItems.value = items.value.slice().filter(item => item.name.toUpperCase().includes(filterValue.toUpperCase()) || String(item.id).includes(filterValue))
+  filteredItems.value = items.value.slice().filter((item: any) => item.name.toUpperCase().includes(filterValue.toUpperCase()) || String(item.id).includes(filterValue))
 }
 
 const goBack = () => {
@@ -86,7 +87,7 @@ onBeforeMount(async () => {
     await store.getCategories()
   }
   const responseItems = await store.getItemsByCategory(id)
-  items.value = responseItems.filter(item => item)
+  items.value = responseItems.filter((item: any) => item)
   console.log(items.value)
   filteredItems.value = items.value
   isLoading.value = false
