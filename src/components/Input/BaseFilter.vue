@@ -36,7 +36,7 @@ const handleInput = () => {
 
 .filter-label {
   font-size: 18px;
-  color: #333;
+  color: white;
 }
 
 .filter-input {

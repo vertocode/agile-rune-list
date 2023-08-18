@@ -45,23 +45,46 @@ onBeforeMount(async () => {
 
 <style lang="scss">
 .general-market {
+  background: linear-gradient(135deg, #222, #646464);
+  color: white;
+
   h1 {
     text-align: center;
+    font-size: 2.2rem;
+    color: #f1be2d;
+    margin-top: 1em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   }
 
   .list-content {
-    padding: 1em;
+    padding: 2em;
 
     .base-filter {
-      width: 50%;
+      width: 60%;
       padding-bottom: 2em;
       margin: auto;
+
+      input {
+        background-color: transparent;
+        border: 2px solid #f1be2d;
+        border-radius: 5px;
+        color: white;
+        font-size: 1rem;
+        padding: 10px;
+        width: 100%;
+        transition: border-color 0.3s ease;
+
+        &:focus {
+          outline: none;
+          border-color: #e69915;
+        }
+      }
     }
 
     .list {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-      gap: 3em;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2em;
     }
   }
 }

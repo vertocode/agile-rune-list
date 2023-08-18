@@ -33,12 +33,12 @@ defineProps<{
 
 <style scoped>
 .item-card {
-  background-color: #f3f5f9;
-  border-radius: 10px;
+  background-color: #2c2c2c;
+  border-radius: 15px;
   padding: 20px;
   display: flex;
   align-items: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease-in-out;
 }
 
@@ -49,7 +49,7 @@ defineProps<{
 .item-price {
   font-size: 20px;
   font-weight: bold;
-  color: #47a8f9;
+  color: #f1be2d;
 }
 
 .item-image {
@@ -59,7 +59,7 @@ defineProps<{
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background-color: white;
+  background-color: #3c3c3c;
   margin-right: 20px;
 }
 
@@ -73,16 +73,16 @@ defineProps<{
 }
 
 .item-title {
-  font-size: 24px;
+  font-size: 20px;
   margin-bottom: 10px;
-  color: #333;
+  color: #fff;
 }
 
 .item-description,
 .item-description-placeholder {
   font-size: 16px;
   margin-bottom: 10px;
-  color: #555;
+  color: #ccc;
 }
 
 .item-description-placeholder {
@@ -92,12 +92,12 @@ defineProps<{
 .item-id {
   font-size: 18px;
   opacity: 0.8;
-  color: #555;
+  color: #ccc;
 }
 
 .open-button {
   margin-top: 1em;
-  background-color: #f7be3d;
+  background-color: #f1be2d;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -108,6 +108,7 @@ defineProps<{
 }
 
 .open-button:hover {
-  background-color: #dbaa31;
+  background-color: #e69915;
 }
 </style>
+

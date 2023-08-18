@@ -101,6 +101,9 @@ onBeforeMount(async () => {
 
 <style lang="scss">
 .general-market-items {
+  background: linear-gradient(135deg, #222, #646464);
+  color: white;
+
   .title-wrapper {
     display: flex;
     align-items: center;
@@ -110,8 +113,8 @@ onBeforeMount(async () => {
     .back-button {
       display: flex;
       align-items: center;
-      background-color: #f7be3d;
-      color: #fff;
+      background-color: #f1be2d;
+      color: white;
       border: none;
       border-radius: 4px;
       padding: 5px 10px;
@@ -127,28 +130,46 @@ onBeforeMount(async () => {
     }
 
     .back-button:hover {
-      background-color: #dbaa31;
+      background-color: #e69915;
     }
 
     h1 {
       text-align: center;
       margin-left: 1em;
+      font-size: 2.2rem;
+      color: #f1be2d;
     }
   }
 
   .list-content {
-    padding: 1em;
+    padding: 2em;
 
     .base-filter {
-      width: 50%;
+      width: 60%;
       padding-bottom: 2em;
       margin: auto;
+
+      input {
+        background-color: transparent;
+        border: 2px solid #f1be2d;
+        border-radius: 5px;
+        color: white;
+        font-size: 1rem;
+        padding: 10px;
+        width: 100%;
+        transition: border-color 0.3s ease;
+
+        &:focus {
+          outline: none;
+          border-color: #e69915;
+        }
+      }
     }
 
     .list {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-      gap: 3em;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2em;
     }
   }
 }

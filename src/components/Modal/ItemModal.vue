@@ -56,7 +56,7 @@ export default {
 }
 
 .modal-content {
-  background-color: #f9f9f9;
+  background-color: #2c2c2c;
   border-radius: 10px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
   max-width: 90%;
@@ -71,13 +71,13 @@ export default {
   border: none;
   background-color: transparent;
   font-size: 18px;
-  color: #777;
+  color: #ccc;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
 .close-button:hover {
-  color: #333;
+  color: #fff;
 }
 
 .item-details {
@@ -101,13 +101,13 @@ export default {
 .item-name {
   font-size: 28px;
   margin-bottom: 10px;
-  color: #333;
+  color: #fff;
 }
 
 .item-description {
   margin-bottom: 15px;
   font-size: 18px;
-  color: #555;
+  color: #ccc;
 }
 
 .price-info {
@@ -119,10 +119,12 @@ export default {
 .current-price {
   font-size: 20px;
   margin-right: 10px;
+  color: #f7be3d; /* Modern orange color */
 }
 
 .price-trend {
   font-size: 20px;
+  color: #ccc;
 }
 
 .positive {
@@ -140,6 +142,7 @@ export default {
 .item-type,
 .members-only {
   font-size: 18px;
-  color: #777;
+  color: #ccc;
 }
 </style>
+

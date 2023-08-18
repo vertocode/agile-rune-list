@@ -62,8 +62,8 @@ const changeRoute = (route: string) => {
 
 <style scoped lang="scss">
 .content {
-  background-color:  #f3f5f9;
-  box-shadow: rgba(84, 66, 25, 0.65) 0 1px 8px;
+  background-color: #2c2c2c;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 1px 8px;
   z-index: 3;
   font-family: 'Helvetica', sans-serif; /* Modern font */
 }
@@ -165,21 +165,22 @@ const changeRoute = (route: string) => {
       transition: opacity 0.3s ease;
       opacity: 1;
       font-weight: bold; /* Modern font weight */
+      color: #fff; /* White color */
 
       &:hover {
-        color: gray;
+        color: #ccc; /* Light gray color */
         opacity: 1;
       }
     }
 
     li.active-item {
-      color: #F7BE3D; /* Modern orange color */
+      color: #f1be2d; /* Modern orange color */
     }
 
     ::after {
       content: "|";
       position: absolute;
-      color: black;
+      color: #fff; /* White color */
       left: -1.3em;
       animation: fadeAnimation 2s ease-in alternate;
       opacity: 0.5;
