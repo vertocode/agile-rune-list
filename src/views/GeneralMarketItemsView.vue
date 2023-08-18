@@ -61,18 +61,14 @@ const selectedItem: any = ref({})
 
 const selectedCategory = computed(() => {
   const [category] = store.state.allCategories.filter(cateogory => cateogory.id === Number(id))
-  if (!category) {
+  if (!category?.label) {
     goBack()
   }
-  return category.label
+  return category?.label || goBack()
 })
 
 const filterItems = (filterValue: string | Ref<string> | any) => {
-  console.log(items.value, filteredItems.value)
-  console.log(filterValue)
   if (!filterValue) {
-    console.log('entrou')
-    console.log(items.value)
     filteredItems.value = items.value
   }
   filteredItems.value = items.value.slice().filter((item: any) => item.name.toUpperCase().includes(filterValue.toUpperCase()) || String(item.id).includes(filterValue))
