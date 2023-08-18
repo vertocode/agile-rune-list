@@ -3,6 +3,7 @@
     <h1>Select the Category of desired item:</h1>
     <LoadingSpinner v-if="isLoading"/>
     <div class="list-content" v-else>
+      <ErrorToast v-if="showError"/>
       <BaseFilter label="Search by Category or ID" @input:value="store.filterCategories"/>
       <div class="list" v-if="store.state.filteredCategories.length">
         <CategoryCard
@@ -25,12 +26,19 @@ import BaseFilter from "@/components/Input/BaseFilter.vue";
 import NoCategory from "@/components/GeneralMarket/NoCategory.vue";
 import { onBeforeMount, ref } from "vue";
 import LoadingSpinner from "@/components/Spinner/LoadingSpinner.vue";
+import ErrorToast from "@/components/Toast/ErrorToast.vue";
 
 const store = useGeneralMarketItems()
 const isLoading = ref(true)
+const showError = ref(false)
 
 onBeforeMount(async () => {
-  await store.getCategories()
+  try {
+    await store.getCategories()
+  } catch (e) {
+    showError.value = true
+    console.error(e)
+  }
   isLoading.value = false
 })
 </script>

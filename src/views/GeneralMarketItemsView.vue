@@ -22,6 +22,7 @@
     </div>
     <LoadingSpinner v-if="isLoading"/>
     <div class="list-content" v-else>
+      <ErrorToast v-if="showError"/>
       <BaseFilter label="Search by item name or ID" @input:value="filterItems"/>
       <div class="list" v-if="filteredItems?.length">
         <ItemCard
@@ -49,6 +50,7 @@ import LoadingSpinner from "@/components/Spinner/LoadingSpinner.vue"
 import ItemModal from "@/components/Modal/ItemModal.vue"
 import type { RouteParamValue } from 'vue-router'
 import type { Ref } from "vue"
+import ErrorToast from "@/components/Toast/ErrorToast.vue";
 
 const store = useGeneralMarketItems()
 const route = useRoute()
@@ -58,6 +60,7 @@ const items = ref([])
 const filteredItems = ref([])
 const isLoading = ref(true)
 const selectedItem: any = ref({})
+const showError = ref(false)
 
 const selectedCategory = computed(() => {
   const [category] = store.state.allCategories.filter(cateogory => cateogory.id === Number(id))
@@ -79,13 +82,17 @@ const goBack = () => {
 }
 
 onBeforeMount(async () => {
-  if (!store.state.filteredCategories.length) {
-    await store.getCategories()
+  try {
+    if (!store.state.filteredCategories.length) {
+      await store.getCategories()
+    }
+    const responseItems = await store.getItemsByCategory(id)
+    items.value = responseItems.filter((item: any) => item)
+    filteredItems.value = items.value
+  } catch (e) {
+    showError.value = true
+    console.error(e)
   }
-  const responseItems = await store.getItemsByCategory(id)
-  items.value = responseItems.filter((item: any) => item)
-  console.log(items.value)
-  filteredItems.value = items.value
   isLoading.value = false
 })
 
@@ -125,7 +132,7 @@ onBeforeMount(async () => {
 
     h1 {
       text-align: center;
-      margin-left: 1em; /* Adapte o valor conforme necessário */
+      margin-left: 1em;
     }
   }
 
