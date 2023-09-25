@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const API_URL = 'https://rune-fast-api.vercel.app'
-
 export class API {
     #api: string
 

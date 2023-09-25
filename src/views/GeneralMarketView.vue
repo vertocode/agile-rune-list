@@ -5,7 +5,7 @@
     <div class="list-content" v-else>
       <ErrorToast v-if="showError"/>
       <BaseFilter label="Search by Category or ID" @input:value="store.filterCategories"/>
-      <div class="list" v-if="store.state.filteredCategories.length">
+      <div class="list" v-if="store.state.filteredCategories?.length">
         <CategoryCard
             v-for="{ label, id } in store.state.filteredCategories"
             :key="id"

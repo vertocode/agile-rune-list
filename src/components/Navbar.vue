@@ -13,7 +13,7 @@
         <li
             v-for="{ label, route } in navOptions"
             :key="route"
-            :class="{ 'active-item': $route.path === route }"
+            :class="{ 'active-item': $route.path.includes(route) }"
             @click="changeRoute(route)"
         >
           {{ label }}

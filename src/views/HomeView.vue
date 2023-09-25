@@ -35,15 +35,6 @@
           <p class="access-description">Immerse yourself in Old School RuneScape, an engaging and nostalgic online multiplayer game. Traverse a medieval fantasy world filled with quests, challenges, and diverse environments. Embark on epic adventures, encounter mythical creatures, and master a range of skills. With the Jagex Launcher, manage accounts efficiently and switch between up to 20 characters seamlessly. Experience the freedom to play your way—choose the official client or RuneLite. Old School RuneScape offers a vibrant community, regular updates, and a treasure trove of memorable experiences.</p>
         </div>
       </div>
-
-      <div class="rune-img">
-        <div class="play-now">
-          <a class="play-button" target="_blank" href="https://play.runescape.com/">Play Now</a>
-        </div>
-        <div class="player-img">
-          <img src="../assets/home/armour-player.png" alt="player-img">
-        </div>
-      </div>
     </div>
   </div>
 </template>
