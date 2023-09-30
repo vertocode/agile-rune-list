@@ -22,6 +22,9 @@ export const useGeneralMarketItems = defineStore('generalMarketItems', () => {
     })
 
     const getCategories = async (): Promise<void> => {
+        if (state.allCategories.length && state.filteredCategories.length) {
+            return
+        }
         const { data } = await api.get(`/categories`)
         state.filteredCategories = data
         state.allCategories = data

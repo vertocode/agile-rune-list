@@ -18,7 +18,7 @@ export const useRankPlayers = defineStore('rankPlayers', () => {
         players: []
     })
 
-    const initializePlayerRank = async (categoryId: number) => {
+    const getPlayerRank = async (categoryId: number) => {
         interface Response {
             data: {
                 players: Player[]
@@ -32,6 +32,6 @@ export const useRankPlayers = defineStore('rankPlayers', () => {
 
     return {
         state,
-        initializePlayerRank
+        getPlayerRank
     }
 })

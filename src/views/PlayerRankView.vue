@@ -1,8 +1,8 @@
 <template>
-  <loading-spinner v-if="!players?.length"/>
-  <div class="rank-content" v-else>
-    <div class="player-ranking">
-      <h1 class="ranking-title">RuneScape Player Ranking</h1>
+  <div class="rank-content">
+    <div class="player-ranking" :class="{ loading: !players?.length }">
+      <h1 class="ranking-title" v-if="selectedOption">The Top 50 RuneScape Players in the "{{ selectedOption }}" Category</h1>
+      <BaseAutocomplete class="ranking-category-autocomplete" @update-option="updatePlayersByCategory" :options="categoryLabels" label="Select an Category..."/>
       <ul class="ranking-list">
         <li class="ranking-header">
           <span class="ranking-position"><i>rank</i></span>
@@ -22,17 +22,37 @@
   </div>
 </template>
 
-<script setup>
-import LoadingSpinner from '@/components/Spinner/LoadingSpinner.vue'
-import { computed, onMounted } from 'vue'
+<script setup lang="ts">
+import {computed, onMounted, ref} from 'vue'
 import { useRankPlayers } from '@/stores/useRankPlayers'
+import BaseAutocomplete from "@/components/Input/BaseAutocomplete.vue";
+import { useGeneralMarketItems } from '@/stores/useGeneralMarketItems'
 
 const rankStore = useRankPlayers()
+const generalStore = useGeneralMarketItems()
+const selectedOption = ref(generalStore.state.allCategories?.at(0)?.label || '')
+
+const updatePlayersByCategory = async (categoryLabel: string) => {
+  selectedOption.value = categoryLabel
+  rankStore.state.players = []
+  if (!generalStore.state.allCategories.length) {
+    await generalStore.getCategories()
+  }
+  const { id: categoryId } = generalStore.state.allCategories.filter(category => category.label === categoryLabel).at(0)
+
+  await rankStore.getPlayerRank(categoryId)
+}
+
+const categoryLabels = computed(() => generalStore.state.allCategories.map(category => category.label))
 
 const players = computed(() => rankStore.state.players)
 
 onMounted(async () => {
-  await rankStore.initializePlayerRank(0)
+  await Promise.all([
+      generalStore.getCategories(),
+      rankStore.getPlayerRank(0),
+  ])
+  selectedOption.value = generalStore.state.allCategories?.at(0)?.label
 })
 </script>
 
@@ -61,6 +81,11 @@ onMounted(async () => {
   font-weight: bold;
   color: #f1be2d;
   margin: auto auto 10px;
+}
+
+.ranking-category-autocomplete {
+  display: flex;
+  justify-content: center;
 }
 
 .ranking-list {
@@ -130,5 +155,18 @@ onMounted(async () => {
 
 .see-details-link:hover {
   text-decoration: underline;
+}
+
+.loading {
+  text-align: center;
+  color: #999;
+  font-size: 18px;
+}
+
+.loading::after {
+  content: "Loading...";
+  display: block;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 </style>
