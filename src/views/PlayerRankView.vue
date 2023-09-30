@@ -2,7 +2,7 @@
   <div class="rank-content">
     <div class="player-ranking" :class="{ loading: !players?.length }">
       <h1 class="ranking-title" v-if="selectedOption">The Top 50 RuneScape Players in the "{{ selectedOption }}" Category</h1>
-      <BaseAutocomplete class="ranking-category-autocomplete" @update-option="updatePlayersByCategory" :options="categoryLabels" label="Select an Category..."/>
+      <BaseAutocomplete class="ranking-category-autocomplete" @update-option="updatePlayersByCategory" :options="categoryLabels" label="Select a Category..."/>
       <ul class="ranking-list">
         <li class="ranking-header">
           <span class="ranking-position"><i>rank</i></span>
