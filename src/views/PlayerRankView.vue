@@ -30,7 +30,7 @@ import { useGeneralMarketItems } from '@/stores/useGeneralMarketItems'
 
 const rankStore = useRankPlayers()
 const generalStore = useGeneralMarketItems()
-const selectedOption = ref(generalStore.state.allCategories?.at(0)?.label || '')
+const selectedOption = ref(generalStore.state.allCategories[0]?.label || '')
 
 const updatePlayersByCategory = async (categoryLabel: string) => {
   selectedOption.value = categoryLabel
@@ -38,7 +38,7 @@ const updatePlayersByCategory = async (categoryLabel: string) => {
   if (!generalStore.state.allCategories.length) {
     await generalStore.getCategories()
   }
-  const { id: categoryId } = generalStore.state.allCategories.filter(category => category.label === categoryLabel).at(0)
+  const { id: categoryId } = generalStore.state.allCategories.filter(category => category.label === categoryLabel)[0]
 
   await rankStore.getPlayerRank(categoryId)
 }
@@ -52,7 +52,7 @@ onMounted(async () => {
       generalStore.getCategories(),
       rankStore.getPlayerRank(0),
   ])
-  selectedOption.value = generalStore.state.allCategories?.at(0)?.label
+  selectedOption.value = generalStore.state.allCategories[0]?.label
 })
 </script>
 
