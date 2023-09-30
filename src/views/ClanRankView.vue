@@ -1,21 +1,23 @@
 <template>
   <div class="rank-content">
     <div class="clan-ranking" :class="{ loading: !clans?.length }">
-      <h1 class="ranking-title" v-if="selectedOption">The Top 50 RuneScape Clans in the "{{ selectedOption }}" Category</h1>
-      <BaseAutocomplete class="ranking-category-autocomplete" @update-option="updateClansByCategory" :options="categoryLabels" label="Select a Category..."/>
+      <h1 class="ranking-title">The Top RuneScape Clans</h1>
       <ul class="ranking-list">
         <li class="ranking-header">
           <span class="ranking-position"><i>rank</i></span>
           <span class="ranking-player"><i>clan name</i></span>
-          <span class="ranking-level"><i>score</i></span>
+          <span class="ranking-player"><i>clan mates</i></span>
+          <span class="ranking-level"><i>xp</i></span>
         </li>
         <li v-for="clan in clans" :key="clan.rank" class="ranking-item">
           <span class="ranking-position">{{ clan.rank }}</span>
           <span class="ranking-player">
-            {{ clan.name }}
-            <a href="#" class="see-details-link">See details</a>
+            {{ clan.clan_name }}
           </span>
-          <span class="ranking-level">{{ clan.score }}</span>
+          <span class="ranking-player">
+            {{ clan.clan_mates }}
+          </span>
+          <span class="ranking-level">{{ clan.xp_total }}</span>
         </li>
       </ul>
     </div>
@@ -23,36 +25,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRankClans } from '@/stores/useRankClans'
 import BaseAutocomplete from "@/components/Input/BaseAutocomplete.vue";
-import { useGeneralMarketItems } from '@/stores/useGeneralMarketItems'
 
 const rankStore = useRankClans()
-const generalStore = useGeneralMarketItems()
-const selectedOption = ref(generalStore.state.allCategories?.at(0)?.label || '')
-
-const updateClansByCategory = async (categoryLabel: string) => {
-  selectedOption.value = categoryLabel
-  rankStore.state.clans = []
-  if (!generalStore.state.allCategories.length) {
-    await generalStore.getCategories()
-  }
-  const { id: categoryId } = generalStore.state.allCategories.find(category => category.label === categoryLabel)
-
-  await rankStore.getClanRank(categoryId)
-}
-
-const categoryLabels = computed(() => generalStore.state.allCategories.map(category => category.label))
 
 const clans = computed(() => rankStore.state.clans)
 
 onMounted(async () => {
-  await Promise.all([
-    generalStore.getCategories(),
-    rankStore.getClanRank(0),
-  ])
-  selectedOption.value = generalStore.state.allCategories?.at(0)?.label
+  await rankStore.getClanRank()
 })
 </script>
 
