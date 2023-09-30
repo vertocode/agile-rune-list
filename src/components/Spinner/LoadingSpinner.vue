@@ -14,6 +14,7 @@ export default defineComponent({
 
 <style scoped>
 .loading-container {
+  min-width: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
